@@ -1,0 +1,43 @@
+
+  iconst
+  iload
+  istore
+  fconst
+  fload
+  fstore
+
+  iadd
+  isub
+  imul
+  idiv
+  fadd
+  fsub
+  fmul
+  fdiv
+
+  intToFloat
+
+  icmpeq
+  icmpne
+  icmplt
+  icmple
+  icmpgt
+  icmpge
+  fcmpeq
+  fcmpne
+  fcmplt
+  fcmple
+  fcmpgt
+  fcmpge
+203
+
+20.36
+
+-23.96E-32
+  goto
+  invoke
+  return
+  ireturn
+  freturn
+
+  print

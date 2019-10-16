@@ -1,0 +1,56 @@
+TheUltimateTest	  : Lexical Error, invalid token
+fload	  : Fload
+1	  : UnsignedInt
+:	  : Colon
+36.258	  : Float
+iconst	  : Iconst
+FMU	  : Lexical Error, invalid token
+89	  : UnsignedInt
+istore	  : Istore
++32.25	  : Float
+-25	  : SignedInt
+fload	  : Fload
+iload	  : Iload
+icmpgt	  : Icmpgt
++368.9	  : Float
+invoke	  : Invoke
+icmpne	  : Icmpne
+38.	  : Float
+fmul	  : Fmul
+iadd	  : Iadd
+.36ep	  : Lexical Error, invalid token
+wow	  : Lexical Error, invalid token
+3.68e-90	  : FloatE
+fdiv	  : Fdiv
+fadd	  : Fadd
+intToFloat	  : IntToFloat
+652.e-32	  : FloatE
++65	  : SignedInt
+-.369E-45	  : FloatE
+icmpeq	  : Icmpeq
+print	  : Print
+-6589	  : SignedInt
+istore	  : Istore
+fconst	  : Fconst
+96.e-9	  : FloatE
+goto	  : Goto
+-36	  : SignedInt
+return	  : Return
+freturn	  : Freturn
+63.63	  : Float
+iConst	  : Lexical Error, invalid token
+.E	  : Lexical Error, invalid token
+87	  : UnsignedInt
+Iconst	  : Lexical Error, invalid token
+.36e-I	  : Lexical Error, invalid token
+icmplE	  : Lexical Error, invalid token
+--	  : Lexical Error, invalid token
+98	  : UnsignedInt
+fSub	  : Lexical Error, invalid token
+0	  : UnsignedInt
+:	  : Colon
+,	  : Comma
+Fsub	  : Lexical Error, invalid token
+.36	  : Float
+.366	  : Float
+fsTore	  : Lexical Error, invalid token

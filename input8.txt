@@ -1,0 +1,3 @@
+TheUltimateTest fload1:36.258iconstFMU89istore+32.25-25floadiloadicmpgt+368.9invokeicmpne38.fmuliadd.36epwow3.68e-90
+fdivfaddintToFloat652.e-32+65-.369E-45icmpeqprint-6589istorefconst96.e-9goto-36returnfreturn63.63iConst.E87
+Iconst.36e-IicmplE--98fSub0:,Fsub.36.366fsTore

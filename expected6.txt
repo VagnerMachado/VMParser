@@ -1,0 +1,23 @@
+123.456e+
+ : Lexical Error, invalid token
+123.456E-
+ : Lexical Error, invalid token
+123.E-
+ : Lexical Error, invalid token
+.456e+
+ : Lexical Error, invalid token
++123.456e+
+ : Lexical Error, invalid token
++123.456E-
+ : Lexical Error, invalid token
++123.E-
+ : Lexical Error, invalid token
++.456e+
+ : Lexical Error, invalid token
+-123.456e+
+ : Lexical Error, invalid token
+-123.456E-
+ : Lexical Error, invalid token
+-123.E-
+ : Lexical Error, invalid token
+-.456e+ : Lexical Error, invalid token

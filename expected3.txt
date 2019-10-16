@@ -1,0 +1,6 @@
+5   : UnsignedInt
++5   : SignedInt
+-5   : SignedInt
+1234   : UnsignedInt
++1234   : SignedInt
+-1234   : SignedInt

@@ -1,0 +1,1 @@
+icoNst	: Lexical Error, invalid token

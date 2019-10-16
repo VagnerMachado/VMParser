@@ -1,0 +1,42 @@
+
+  icoNst
+  iloab
+  qstore
+  fconstt
+  f9load
+  Fstore
+
+  iaddition
+  iSUb
+  mul
+  div
+  fad*d
+  fs+ub
+  fmul%
+  f#div
+
+  intTFloat
+
+  icmpfq
+  icmpneq765
+  123icmpls
+  icmplw
+  icnpgt
+  icnpge
+  fcmoeq
+  fcmone
+  fcmllt
+  fcmlle
+  fcm{gt
+  fcm}ge
+
+  GOTO
+  nvoke
+  retur
+  jreturn
+  hreturn
+
+  priint
+  
+  
+  
