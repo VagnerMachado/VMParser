@@ -1,0 +1,48 @@
++20:
+
+iconst
+
+50
+
+21:
+
+iconst -20
+
+iconst 40
+
+iload 40
+
+iload +54
+
+iload 63
+
+istore +50
+
+istore 41
+
+fload 54
+
+fload +62
+
+fstore 60
+
+fstore 60
+
+fconst 63
+
+fconst 32
+
+iconst 3.214587E2
+
+iadd
+
+imul
+iconst 32
+27:
+imul idiv fadd fsub fmul fdiv fconst 32 iconst 32.9983587412 intToFloat
+
+ireturn
+
+freturn 32:
+
+return :

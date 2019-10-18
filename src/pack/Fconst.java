@@ -2,11 +2,11 @@ package pack;
 
 public class Fconst extends Instruction
 {
-	float constant; //must work for float and float E
+	double constant; //must work for float and float E
 
-	public Fconst(float c)
+	public Fconst(double d)
 	{
-		constant = c;
+		constant = d;
 	}
 	
 	public String print() 

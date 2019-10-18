@@ -196,6 +196,7 @@ public abstract class LexVM
 		{
 			Stream.charToken = (char) Stream.intToken;// parse int to char
 			nextSt = State.nextState(state, Stream.charToken ); //get next state based on char
+		//	System.out.println("next state: " + nextSt.toString());
 			if ( nextSt == State.UNDEF ) 			  // The current DFA operation will halt.
 			{
 				if (State.isFinal(state)) 			  // valid token extracted
@@ -233,15 +234,16 @@ public abstract class LexVM
 	public static String getToken()
 	{
 		int i = driver();
-		if (i == 0)
+	//	System.out.println("This is i: " + i + " and state is " + state.toString());
+		if (i == 0) //error
 		{
 			Stream.displayln(tokens + "\t: Lexical Error, invalid token");
 			return null;
 		}
-		else if (i == -1)
-			return null;
-		else
+		else if (i == 1) // valid
 			return tokens;
+		else
+			return null; // -1 for end of file
 	}
 
 	/**
