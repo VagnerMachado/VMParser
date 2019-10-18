@@ -1,5 +1,6 @@
+v=	goto 15
 1:
-	fload 3.14159
+	fconst 3.14159
 	freturn
 2:
 	fload 0
@@ -7,9 +8,9 @@
 	fmul
 	freturn
 3:
-	invoke 1, 0
+	invoke 1, 0, 0
 	fload 1
-	invoke 2, 1
+	invoke 2, 1, 0
 	fmul
 	fload 0
 	fmul
@@ -37,7 +38,7 @@
 	icmpgt 10
 9:      iconst +6453
 	ireturn
-10:     iconst -1540
+4:      iconst -1540
 	ireturn
 6:
 	iload 0
@@ -73,17 +74,50 @@
 	iload 0
 	iconst 1
 	isub
-	invoke 7, 1
+	invoke 7, 1, 0
 	imul
 	ireturn	
-8:
-	iconst 5
-	invoke 7, 1
-	istore 0
+1:
+	invoke 1, 0, 0
+	fstore 0
+	print 0
+
+	fconst 78.045e-4
+	invoke 2, 1, 0
+	fstore 1
+	print 1
+
 	fconst 23.5
 	fconst 56.E+2
-	invoke 3, 2
+	invoke 3, 2, 0
 	fstore 1
-	print 0
 	print 1
+
+	iconst 10
+	iconst 20
+	fconst 34.E2
+	fconst .5
+	invoke 4, 4, 0
+	fstore 1
+	print 1
+
+	iconst 10
+	iconst 20
+	invoke 5, 2, 1
+	istore 2
+	print 2
+
+	iconst 15
+	invoke 6, 1, 0
+	istore 2
+	print 2
+
+	iconst 5
+	invoke 7, 1, 0
+	istore 2
+	print 2
+
 	return
+
+15:
+	invoke 8, 0, 3

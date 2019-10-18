@@ -1,6 +1,2 @@
-5   : UnsignedInt
-+5   : SignedInt
--5   : SignedInt
-1234   : UnsignedInt
-+1234   : SignedInt
--1234   : SignedInt
+265 : Syntax Error, unexpected symbol where floating-point number expected
+fload : Syntax Error, unexpected symbol where : expected

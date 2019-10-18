@@ -1,0 +1,19 @@
+0: goto 18
+1: iload 0
+2: iconst 0
+3: icmpne 6
+4: iconst 1
+5: ireturn
+6: iload 0
+7: iload 0
+8: iconst 1
+9: isub
+10: invoke 1, 1, 0
+11: imul
+12: ireturn
+13: iconst 5
+14: invoke 1, 1, 0
+15: istore 0
+16: print 0
+17: return
+18: invoke 13, 0, 1

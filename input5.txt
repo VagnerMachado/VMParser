@@ -1,23 +1,40 @@
-+
--
-.
-+.
--.
 
-123.456e
-123.456E
+  iconst -123
+  iload  5
+  istore 6
+  fconst +265.87E-1
+  fload  1
+  fstore 2
 
-123.E
-.456e
+40:
+  iadd
+  isub
+  imul
+  idiv
+  fadd
+  fsub
+  fmul
+  fdiv
 
-+123.456e
-+123.456E
+  intToFloat
 
-+123.E
-+.456e
+  icmpeq 20
+  icmpne 20
+  icmplt 20
+  icmple 20
+  icmpgt 20
+  icmpge 20
+  fcmpeq 20
+  fcmpne 20
+  fcmplt 20
+  fcmple 20
+  fcmpgt 20
+  fcmpge 20
 
--123.456e
--123.456E
-
--123.E
--.456e
+  goto 20
+  invoke 40, 3
+  return
+  ireturn
+  freturn
+20:
+  print 5

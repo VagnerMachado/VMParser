@@ -1,11 +1,12 @@
 
-  iconst
-  iload
-  istore
-  fconst
-  fload
-  fstore
+  iconst -123
+  iload  5
+  istore 6
+  fconst +265.87E-1
+  fload  1
+  fstore 2
 
+40:
   iadd
   isub
   imul
@@ -17,27 +18,23 @@
 
   intToFloat
 
-  icmpeq
-  icmpne
-  icmplt
-  icmple
-  icmpgt
-  icmpge
-  fcmpeq
-  fcmpne
-  fcmplt
-  fcmple
-  fcmpgt
-  fcmpge
-203
+  icmpeq 20
+  icmpne 20
+  icmplt 20
+  icmple 20
+  icmpgt 20
+  icmpge 20
+  fcmpeq 20
+  fcmpne 20
+  fcmplt 20
+  fcmple 20
+  fcmpgt 20
+  fcmpge 20
 
-20.36
-
--23.96E-32
-  goto
-  invoke
+  goto 20
+  invoke 40, 3, 4
   return
   ireturn
   freturn
-
-  print
+20:
+  print 5
