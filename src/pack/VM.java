@@ -1,5 +1,8 @@
 package pack;
 
+/*
+ * GO TO LINE 243 10/18 12:19PM
+ */
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,8 +16,13 @@ public class VM extends LexVM
 
 	public static void main(String[] args) 
 	{
-
 		Stream.setStream(args[0], args[1]);
+		//		
+		//		System.out.println(getToken()); 
+		//		System.out.println(getToken()); 
+		//		System.out.println(state.toString()); 
+
+
 		String val = getToken();
 		String colon = "";
 		while(val != null)
@@ -239,10 +247,372 @@ public class VM extends LexVM
 				instructionArray[arrayLocation++] = new Freturn();
 				break;
 			}
+			case Goto:
+			{
+				val = getToken();
+				if(state.equals(State.SignedInt) || state.equals(State.UnsignedInt))
+				{
+					if(Integer.parseInt(val) >= 0)
+						instructionArray[arrayLocation++] = new Goto(Integer.parseInt(val));
+					else
+					{
+						Stream.displayln("Syntax Error: Goto expects a non negative integer, parser extracted \"" + val + "\"");
+						Stream.close();
+						return;
+					}
+				}
+				else
+				{
+					Stream.displayln("Syntax Error: Goto expects an integer, parser extracted \"" + val + "\"");
+					Stream.close();
+					return;
+				}
+				break;
+			}
+			case print:
+			{
+				val = getToken();
+				if(state.equals(State.SignedInt) || state.equals(State.UnsignedInt))
+				{
+					if(Integer.parseInt(val) >= 0)
+						instructionArray[arrayLocation++] = new Print(Integer.parseInt(val));
+					else
+					{
+						Stream.displayln("Syntax Error: Print expects a non negative integer address, parser extracted \"" + val + "\"");
+						Stream.close();
+						return;
+					}
+				}
+				else
+				{
+					Stream.displayln("Syntax Error: Print expects a non negative integer address, parser extracted \"" + val + "\"");
+					Stream.close();
+					return;
+				}
+				break;
+			}
+			case invoke:
+			{
+				int [] params = new int[3];
+				int index = 0;
+				val = getToken();
+				while(index < 3)
+				{
+					if(state.equals(State.SignedInt) || state.equals(State.UnsignedInt))
+					{
+						if(Integer.parseInt(val) >= 0)
+							params[index++] = Integer.parseInt(val);
+						else
+						{
+							Stream.displayln("Syntax Error: Invoke expects a non negative integer parameters, parser extracted \"" + val + "\"");
+							Stream.close();
+							return;
+						}
+					}
+					else
+					{
+						Stream.displayln("Syntax Error: Invoke expects a non negative integer parameters, parser extracted \"" + val + "\"");
+						Stream.close();
+						return;
+					}
+					if(index != 3)
+					{
+						val = getToken();
+						if(!state.equals(State.Comma))
+						{
+							Stream.displayln("Syntax Error: Invoke expects comma separated parameters, parser extracted \"" + val + "\"");
+							Stream.close();
+							return;
+						}
+						val = getToken();
+					}
+				}
+				instructionArray[arrayLocation++] = new Invoke(params[0], params[1], params[2]);
+				break;
+			}
+			case icmpeq:
+			{
+				val = getToken();
+				if(state.equals(State.SignedInt) || state.equals(State.UnsignedInt))
+				{
+					if(Integer.parseInt(val) >= 0)
+						instructionArray[arrayLocation++] = new Icmpeq(Integer.parseInt(val));
+					else
+					{
+						Stream.displayln("Syntax Error: icmpeq expects a non negative integer jump target, parser extracted \"" + val + "\"");
+						Stream.close();
+						return;
+					}
+				}
+				else
+				{
+					Stream.displayln("Syntax Error: icmpeq expects a non negative integer jump target, parser extracted \"" + val + "\"");
+					Stream.close();
+					return;
+				}
+				
+				break;
+			}
+			
+			case icmpne:
+			{
+				val = getToken();
+				if(state.equals(State.SignedInt) || state.equals(State.UnsignedInt))
+				{
+					if(Integer.parseInt(val) >= 0)
+						instructionArray[arrayLocation++] = new Icmpne(Integer.parseInt(val));
+					else
+					{
+						Stream.displayln("Syntax Error: icmpne expects a non negative integer jump target, parser extracted \"" + val + "\"");
+						Stream.close();
+						return;
+					}
+				}
+				else
+				{
+					Stream.displayln("Syntax Error: icmpne expects a non negative integer jump target, parser extracted \"" + val + "\"");
+					Stream.close();
+					return;
+				}				
+				break;
+			}
+			
+			case icmplt:
+			{
+				val = getToken();
+				if(state.equals(State.SignedInt) || state.equals(State.UnsignedInt))
+				{
+					if(Integer.parseInt(val) >= 0)
+						instructionArray[arrayLocation++] = new Icmplt(Integer.parseInt(val));
+					else
+					{
+						Stream.displayln("Syntax Error: icmplt expects a non negative integer jump target, parser extracted \"" + val + "\"");
+						Stream.close();
+						return;
+					}
+				}
+				else
+				{
+					Stream.displayln("Syntax Error: icmplt expects a non negative integer jump target, parser extracted \"" + val + "\"");
+					Stream.close();
+					return;
+				}
+				break;
+			}
+			
+			case icmple:
+			{
+				val = getToken();
+				if(state.equals(State.SignedInt) || state.equals(State.UnsignedInt))
+				{
+					if(Integer.parseInt(val) >= 0)
+						instructionArray[arrayLocation++] = new Icmple(Integer.parseInt(val));
+					else
+					{
+						Stream.displayln("Syntax Error: icmple expects a non negative integer jump target, parser extracted \"" + val + "\"");
+						Stream.close();
+						return;
+					}
+				}
+				else
+				{
+					Stream.displayln("Syntax Error: icmple expects a non negative integer jump target, parser extracted \"" + val + "\"");
+					Stream.close();
+					return;
+				}
+				break;
+			}
+			
+			case icmpgt:
+			{
+				val = getToken();
+				if(state.equals(State.SignedInt) || state.equals(State.UnsignedInt))
+				{
+					if(Integer.parseInt(val) >= 0)
+						instructionArray[arrayLocation++] = new Icmpgt(Integer.parseInt(val));
+					else
+					{
+						Stream.displayln("Syntax Error: icmpgt expects a non negative integer jump target, parser extracted \"" + val + "\"");
+						Stream.close();
+						return;
+					}
+				}
+				else
+				{
+					Stream.displayln("Syntax Error: icmpgt expects a non negative integer jump target, parser extracted \"" + val + "\"");
+					Stream.close();
+					return;
+				}
+				break;
+			}
+			
+			case icmpge:
+			{
+				val = getToken();
+				if(state.equals(State.SignedInt) || state.equals(State.UnsignedInt))
+				{
+					if(Integer.parseInt(val) >= 0)
+						instructionArray[arrayLocation++] = new Icmpge(Integer.parseInt(val));
+					else
+					{
+						Stream.displayln("Syntax Error: icmpge expects a non negative integer jump target, parser extracted \"" + val + "\"");
+						Stream.close();
+						return;
+					}
+				}
+				else
+				{
+					Stream.displayln("Syntax Error: icmpge expects a non negative integer jump target, parser extracted \"" + val + "\"");
+					Stream.close();
+					return;
+				}
+				break;
+			}
+			case fcmpeq:
+			{
+				val = getToken();
+				if(state.equals(State.SignedInt) || state.equals(State.UnsignedInt))
+				{
+					if(Integer.parseInt(val) >= 0)
+						instructionArray[arrayLocation++] = new Fcmpeq(Integer.parseInt(val));
+					else
+					{
+						Stream.displayln("Syntax Error: fcmpeq expects a non negative integer jump target, parser extracted \"" + val + "\"");
+						Stream.close();
+						return;
+					}
+				}
+				else
+				{
+					Stream.displayln("Syntax Error: fcmpeq expects a non negative integer jump target, parser extracted \"" + val + "\"");
+					Stream.close();
+					return;
+				}
+				
+				break;
+			}
+			
+			case fcmpne:
+			{
+				val = getToken();
+				if(state.equals(State.SignedInt) || state.equals(State.UnsignedInt))
+				{
+					if(Integer.parseInt(val) >= 0)
+						instructionArray[arrayLocation++] = new Fcmpne(Integer.parseInt(val));
+					else
+					{
+						Stream.displayln("Syntax Error: fcmpne expects a non negative integer jump target, parser extracted \"" + val + "\"");
+						Stream.close();
+						return;
+					}
+				}
+				else
+				{
+					Stream.displayln("Syntax Error: fcmpne expects a non negative integer jump target, parser extracted \"" + val + "\"");
+					Stream.close();
+					return;
+				}				
+				break;
+			}
+			
+			case fcmplt:
+			{
+				val = getToken();
+				if(state.equals(State.SignedInt) || state.equals(State.UnsignedInt))
+				{
+					if(Integer.parseInt(val) >= 0)
+						instructionArray[arrayLocation++] = new Fcmplt(Integer.parseInt(val));
+					else
+					{
+						Stream.displayln("Syntax Error: fcmplt expects a non negative integer jump target, parser extracted \"" + val + "\"");
+						Stream.close();
+						return;
+					}
+				}
+				else
+				{
+					Stream.displayln("Syntax Error: fcmplt expects a non negative integer jump target, parser extracted \"" + val + "\"");
+					Stream.close();
+					return;
+				}
+				break;
+			}
+			
+			case fcmple:
+			{
+				val = getToken();
+				if(state.equals(State.SignedInt) || state.equals(State.UnsignedInt))
+				{
+					if(Integer.parseInt(val) >= 0)
+						instructionArray[arrayLocation++] = new Fcmple(Integer.parseInt(val));
+					else
+					{
+						Stream.displayln("Syntax Error: fcmple expects a non negative integer jump target, parser extracted \"" + val + "\"");
+						Stream.close();
+						return;
+					}
+				}
+				else
+				{
+					Stream.displayln("Syntax Error: fcmple expects a non negative integer jump target, parser extracted \"" + val + "\"");
+					Stream.close();
+					return;
+				}
+				break;
+			}
+			
+			case fcmpgt:
+			{
+				val = getToken();
+				if(state.equals(State.SignedInt) || state.equals(State.UnsignedInt))
+				{
+					if(Integer.parseInt(val) >= 0)
+						instructionArray[arrayLocation++] = new Fcmpgt(Integer.parseInt(val));
+					else
+					{
+						Stream.displayln("Syntax Error: fcmpgt expects a non negative integer jump target, parser extracted \"" + val + "\"");
+						Stream.close();
+						return;
+					}
+				}
+				else
+				{
+					Stream.displayln("Syntax Error: fcmpgt expects a non negative integer jump target, parser extracted \"" + val + "\"");
+					Stream.close();
+					return;
+				}
+				break;
+			}
+			
+			case fcmpge:
+			{
+				val = getToken();
+				if(state.equals(State.SignedInt) || state.equals(State.UnsignedInt))
+				{
+					if(Integer.parseInt(val) >= 0)
+						instructionArray[arrayLocation++] = new Icmpge(Integer.parseInt(val));
+					else
+					{
+						Stream.displayln("Syntax Error: fcmpge expects a non negative integer jump target, parser extracted \"" + val + "\"");
+						Stream.close();
+						return;
+					}
+				}
+				else
+				{
+					Stream.displayln("Syntax Error: fcmpge expects a non negative integer jump target, parser extracted \"" + val + "\"");
+					Stream.close();
+					return;
+				}
+				break;
+			}
+			/*
+			 * CASES MISSING: COMPARE,
+			 */
 			default:
 				Stream.displayln("Syntax Error:  Unexpected state \"" + state.toString() +"\" reached while parsing \"" +  val + "\"");
-				Stream.close();
-				return;
+				//Stream.close();
+				//return;
 			}
 
 			val = getToken();

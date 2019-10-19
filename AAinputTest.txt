@@ -45,4 +45,30 @@ ireturn
 
 freturn 32:
 
-return :
+return
+
+goto +20
+
+goto 20
+
+print 7 
+
+print +7
+69:
+print 9
+
+invoke 9 , 8 , 4  
+print +26
+icmpeq 20
+icmpeq +21
+icmpne 22
+icmpgt 23
+icmpge 24
+icmplt 23
+icmple 24
+fcmpeq +21
+fcmpne 22
+fcmpgt 23
+fcmpge 24
+fcmplt 23
+fcmple 24

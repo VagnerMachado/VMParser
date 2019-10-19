@@ -1,1 +1,33 @@
-Syntax Error:  Unexpected state "Colon" reached while parsing ":"
+0: iconst -123
+1: iload 5
+2: istore 6
+3: fconst 26.587
+4: fload 1
+5: fstore 2
+6: iadd
+7: isub
+8: imul
+9: idiv
+10: iadd
+11: fsub
+12: fmul
+13: fdiv
+14: intToFloat
+15: icmpeq 20
+16: icmpne 20
+17: icmplt 20
+18: icmple 20
+19: icmpgt 20
+20: icmpge 20
+21: fcmpeq 20
+22: fcmpne 20
+23: fcmplt 20
+24: fcmple 20
+25: fcmpgt 20
+26: icmpge 20
+27: goto 20
+28: invoke 40, 3, 4
+29: return
+30: ireturn
+31: freturn
+32: print 5

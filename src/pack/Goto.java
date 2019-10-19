@@ -11,6 +11,6 @@ public class Goto extends Instruction
 	
 	public String print()
 	{
-		return "goto" + location;
+		return "goto " + location;
 	}
 }
