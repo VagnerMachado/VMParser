@@ -1,4 +1,4 @@
-	goto 105
+	goto 15
 1:
 	fconst 3.14159
 	freturn

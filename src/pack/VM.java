@@ -1,23 +1,27 @@
 package pack;
-
-/*
- * GO TO LINE 243 10/18 12:19PM
- */
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/*****************************************************************
+ * 
+ * @author Vagner Machado - QC ID 23651127 - Fall 2019
+ *
+ */
 public class VM extends LexVM
 {
-	protected static HashMap<Integer, Integer> jumpMap = new HashMap<Integer, Integer>();
-	//protected static ArrayList<Instruction> instructionArray = new ArrayList<Instruction>();
-	protected static Instruction [] instructionArray = new Instruction[1000];
-	protected static int arrayLocation = 0; //for printing the array
-	
+	private static HashMap<Integer, Integer> jumpMap = new HashMap<Integer, Integer>();
+	private static Instruction [] instructionArray = new Instruction[1000];
+	private static int arrayLocation = 0; //for printing the array
+	private static HashMap<Integer, String> compareTarget = new HashMap<Integer,String>(); //used to check for label existence
+	private static ArrayList<Integer> gotoTarget = new ArrayList<Integer>(); //used to check for label existence
+	private static ArrayList<Integer> invokeTarget = new ArrayList<Integer>(); //used to check for label existence
+
 
 
 	public static void main(String[] args) 
 	{
 		boolean labelError = false; // output 7 expects multiple repeated labels to be printed, this controls that
+		boolean targetError = false; //used to detect undefined target
 		if(args.length < 2)
 		{
 			paramWarning();
@@ -64,7 +68,7 @@ public class VM extends LexVM
 							labelError = true;
 						}
 						else
-						jumpMap.put(target, arrayLocation);
+							jumpMap.put(target, arrayLocation);
 					}
 				}
 				break;
@@ -258,16 +262,10 @@ public class VM extends LexVM
 			case Goto:
 			{
 				val = getToken();
-				if(/*state.equals(State.SignedInt) ||*/ state.equals(State.UnsignedInt))
+				if( state.equals(State.UnsignedInt))
 				{
-					//if(Integer.parseInt(val) >= 0)
 					instructionArray[arrayLocation++] = new Goto(Integer.parseInt(val));
-					//					else
-					//					{
-					//						Stream.displayln("Syntax Error: Goto expects a non negative integer, parser extracted \"" + val + "\"");
-					//						Stream.close();
-					//						return;
-					//					}
+					gotoTarget.add(Integer.parseInt(val));
 				}
 				else
 				{
@@ -280,16 +278,9 @@ public class VM extends LexVM
 			case print:
 			{
 				val = getToken();
-				if(/*state.equals(State.SignedInt) ||*/ state.equals(State.UnsignedInt))
+				if(state.equals(State.UnsignedInt))
 				{
-					//if(Integer.parseInt(val) >= 0)
 					instructionArray[arrayLocation++] = new Print(Integer.parseInt(val));
-					//					else
-					//					{
-					//						Stream.displayln("Syntax Error: Print expects a non negative integer address, parser extracted \"" + val + "\"");
-					//						Stream.close();
-					//						return;
-					//					}
 				}
 				else
 				{
@@ -304,23 +295,12 @@ public class VM extends LexVM
 				int [] params = new int[3];
 				int index = 0;
 				val = getToken();
-				//System.out.print("invoke ");
 				while(index < 3)
 				{
 
-					if(/*state.equals(State.SignedInt) ||*/ state.equals(State.UnsignedInt))
+					if(state.equals(State.UnsignedInt))
 					{
-						//if(Integer.parseInt(val) >= 0)
-						//{
 						params[index++] = Integer.parseInt(val);
-						//System.out.print(val + " " + Integer.parseInt(val) + " - ");
-						//}
-						//						else
-						//						{
-						//							Stream.displayln("Syntax Error: Invoke expects unsigned integer parameters, parser extracted \"" + val + "\"");
-						//							Stream.close();
-						//							return;
-						//						}
 					}
 					else
 					{
@@ -342,22 +322,16 @@ public class VM extends LexVM
 
 				}
 				instructionArray[arrayLocation++] = new Invoke(params[0], params[1], params[2]);
-				//System.out.println();
+				invokeTarget.add(params[0]);
 				break;
 			}
 			case icmpeq:
 			{
 				val = getToken();
-				if(/*state.equals(State.SignedInt) ||*/ state.equals(State.UnsignedInt))
+				if(state.equals(State.UnsignedInt))
 				{
-					//if(Integer.parseInt(val) >= 0)
 					instructionArray[arrayLocation++] = new Icmpeq(Integer.parseInt(val));
-					//					else
-					//					{
-					//						Stream.displayln("Syntax Error: icmpeq expects a non negative integer jump target, parser extracted \"" + val + "\"");
-					//						Stream.close();
-					//						return;
-					//					}
+					compareTarget.put(Integer.parseInt(val), "icmpeq");		
 				}
 				else
 				{
@@ -372,16 +346,10 @@ public class VM extends LexVM
 			case icmpne:
 			{
 				val = getToken();
-				if(/*state.equals(State.SignedInt) ||*/ state.equals(State.UnsignedInt))
+				if(state.equals(State.UnsignedInt))
 				{
-					//if(Integer.parseInt(val) >= 0)
 					instructionArray[arrayLocation++] = new Icmpne(Integer.parseInt(val));
-					//					else
-					//					{
-					//						Stream.displayln("Syntax Error: icmpne expects a non negative integer jump target, parser extracted \"" + val + "\"");
-					//						Stream.close();
-					//						return;
-					//					}
+					compareTarget.put(Integer.parseInt(val), "icmpne");	
 				}
 				else
 				{
@@ -395,16 +363,10 @@ public class VM extends LexVM
 			case icmplt:
 			{
 				val = getToken();
-				if(/*state.equals(State.SignedInt) ||*/ state.equals(State.UnsignedInt))
-				{
-					//if(Integer.parseInt(val) >= 0)
+				if(state.equals(State.UnsignedInt))
+				{						
 					instructionArray[arrayLocation++] = new Icmplt(Integer.parseInt(val));
-					//					else
-					//					{
-					//						Stream.displayln("Syntax Error: icmplt expects a non negative integer jump target, parser extracted \"" + val + "\"");
-					//						Stream.close();
-					//						return;
-					//					}
+					compareTarget.put(Integer.parseInt(val), "icmplt");
 				}
 				else
 				{
@@ -418,16 +380,10 @@ public class VM extends LexVM
 			case icmple:
 			{
 				val = getToken();
-				if(/*state.equals(State.SignedInt) ||*/ state.equals(State.UnsignedInt))
+				if(state.equals(State.UnsignedInt))
 				{
-					//if(Integer.parseInt(val) >= 0)
 					instructionArray[arrayLocation++] = new Icmple(Integer.parseInt(val));
-					//					else
-					//					{
-					//						Stream.displayln("Syntax Error: icmple expects a non negative integer jump target, parser extracted \"" + val + "\"");
-					//						Stream.close();
-					//						return;
-					//					}
+					compareTarget.put(Integer.parseInt(val), "icmple");
 				}
 				else
 				{
@@ -441,16 +397,10 @@ public class VM extends LexVM
 			case icmpgt:
 			{
 				val = getToken();
-				if(/*state.equals(State.SignedInt) ||*/ state.equals(State.UnsignedInt))
+				if(state.equals(State.UnsignedInt))
 				{
-					//if(Integer.parseInt(val) >= 0)
 					instructionArray[arrayLocation++] = new Icmpgt(Integer.parseInt(val));
-					//					else
-					//					{
-					//						Stream.displayln("Syntax Error: icmpgt expects a non negative integer jump target, parser extracted \"" + val + "\"");
-					//						Stream.close();
-					//						return;
-					//					}
+					compareTarget.put(Integer.parseInt(val), "icmpgt");
 				}
 				else
 				{
@@ -464,16 +414,10 @@ public class VM extends LexVM
 			case icmpge:
 			{
 				val = getToken();
-				if(/*state.equals(State.SignedInt) ||*/ state.equals(State.UnsignedInt))
+				if(state.equals(State.UnsignedInt))
 				{
-					//if(Integer.parseInt(val) >= 0)
 					instructionArray[arrayLocation++] = new Icmpge(Integer.parseInt(val));
-					//					else
-					//					{
-					//						Stream.displayln("Syntax Error: icmpge expects a non negative integer jump target, parser extracted \"" + val + "\"");
-					//						Stream.close();
-					//						return;
-					//					}
+					compareTarget.put(Integer.parseInt(val), "icmpge");
 				}
 				else
 				{
@@ -486,16 +430,10 @@ public class VM extends LexVM
 			case fcmpeq:
 			{
 				val = getToken();
-				if(/*state.equals(State.SignedInt) ||*/ state.equals(State.UnsignedInt))
+				if(state.equals(State.UnsignedInt))
 				{
-					//if(Integer.parseInt(val) >= 0)
 					instructionArray[arrayLocation++] = new Fcmpeq(Integer.parseInt(val));
-					//					else
-					//					{
-					//						Stream.displayln("Syntax Error: fcmpeq expects a non negative integer jump target, parser extracted \"" + val + "\"");
-					//						Stream.close();
-					//						return;
-					//					}
+					compareTarget.put(Integer.parseInt(val),"fcmpeq");
 				}
 				else
 				{
@@ -510,16 +448,10 @@ public class VM extends LexVM
 			case fcmpne:
 			{
 				val = getToken();
-				if(/*state.equals(State.SignedInt) ||*/ state.equals(State.UnsignedInt))
+				if(state.equals(State.UnsignedInt))
 				{
-					//if(Integer.parseInt(val) >= 0)
 					instructionArray[arrayLocation++] = new Fcmpne(Integer.parseInt(val));
-					//					else
-					//					{
-					//						Stream.displayln("Syntax Error: fcmpne expects a non negative integer jump target, parser extracted \"" + val + "\"");
-					//						Stream.close();
-					//						return;
-					//					}
+					compareTarget.put(Integer.parseInt(val), "fcmpne");
 				}
 				else
 				{
@@ -533,16 +465,10 @@ public class VM extends LexVM
 			case fcmplt:
 			{
 				val = getToken();
-				if(/*state.equals(State.SignedInt) ||*/ state.equals(State.UnsignedInt))
+				if(state.equals(State.UnsignedInt))
 				{
-					//if(Integer.parseInt(val) >= 0)
 					instructionArray[arrayLocation++] = new Fcmplt(Integer.parseInt(val));
-					//					else
-					//					{
-					//						Stream.displayln("Syntax Error: fcmplt expects a non negative integer jump target, parser extracted \"" + val + "\"");
-					//						Stream.close();
-					//						return;
-					//					}
+					compareTarget.put(Integer.parseInt(val), "fcmplt");
 				}
 				else
 				{
@@ -556,16 +482,10 @@ public class VM extends LexVM
 			case fcmple:
 			{
 				val = getToken();
-				if(/*state.equals(State.SignedInt) ||*/ state.equals(State.UnsignedInt))
+				if(state.equals(State.UnsignedInt))
 				{
-					//	if(Integer.parseInt(val) >= 0)
 					instructionArray[arrayLocation++] = new Fcmple(Integer.parseInt(val));
-					//					else
-					//					{
-					//						Stream.displayln("Syntax Error: fcmple expects a non negative integer jump target, parser extracted \"" + val + "\"");
-					//						Stream.close();
-					//						return;
-					//					}
+					compareTarget.put(Integer.parseInt(val), "fcmpeq");
 				}
 				else
 				{
@@ -579,16 +499,10 @@ public class VM extends LexVM
 			case fcmpgt:
 			{
 				val = getToken();
-				if(/*state.equals(State.SignedInt) ||*/ state.equals(State.UnsignedInt))
+				if(state.equals(State.UnsignedInt))
 				{
-					//	if(Integer.parseInt(val) >= 0)
 					instructionArray[arrayLocation++] = new Fcmpgt(Integer.parseInt(val));
-					//					else
-					//					{
-					//						Stream.displayln("Syntax Error: fcmpgt expects a non negative integer jump target, parser extracted \"" + val + "\"");
-					//						Stream.close();
-					//						return;
-					//					}
+					compareTarget.put(Integer.parseInt(val), "fcmpgt");
 				}
 				else
 				{
@@ -602,16 +516,10 @@ public class VM extends LexVM
 			case fcmpge:
 			{
 				val = getToken();
-				if(/*state.equals(State.SignedInt) ||*/ state.equals(State.UnsignedInt))
+				if(state.equals(State.UnsignedInt))
 				{
-					//if(Integer.parseInt(val) >= 0)
 					instructionArray[arrayLocation++] = new Fcmpge(Integer.parseInt(val));
-					//					else
-					//					{
-					//						Stream.displayln("Syntax Error: fcmpge expects a non negative integer jump target, parser extracted \"" + val + "\"");
-					//						Stream.close();
-					//						return;
-					//					}
+					compareTarget.put(Integer.parseInt(val), "fcmpge");
 				}
 				else
 				{
@@ -630,13 +538,17 @@ public class VM extends LexVM
 
 			val = getToken();
 		}
-		
-		if (labelError)
+
+		targetError = checkTarget(invokeTarget,jumpMap,"invoke");
+		targetError = checkTarget(compareTarget,jumpMap);
+		targetError = checkTarget(gotoTarget,jumpMap,"goto");
+
+		if (labelError || targetError)
 		{
 			Stream.close();
 			return;
 		}
-		
+
 		System.out.println("Printing Map to console");
 		for (HashMap.Entry<Integer,Integer> entry : jumpMap.entrySet())  
 			System.out.println("Key = " + entry.getKey() + 
@@ -680,6 +592,30 @@ public class VM extends LexVM
 				" *****************************************************************************************");
 		return;
 
+	}
+
+	public static boolean checkTarget(ArrayList<Integer> list, HashMap<Integer, Integer> map, String name)
+	{
+		boolean temp = false;
+		for(Integer x : list)
+			if(!map.containsKey(x))
+			{
+				temp = true;
+				Stream.displayln("Syntax Error: The jump target \"" + x + "\" is not defined for function " + name );
+			}
+		return temp;
+	}
+
+	public static boolean checkTarget(HashMap<Integer, String> list, HashMap<Integer, Integer> map)
+	{
+		boolean temp = false;
+		for(HashMap.Entry<Integer, String> x : list.entrySet())
+			if(!map.containsKey(x.getKey()))
+			{
+				temp = true;
+				Stream.displayln("Syntax Error: The jump target \"" + x.getKey() + "\" is not defined for function " + x.getValue());
+			}
+		return temp;
 	}
 
 }

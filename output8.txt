@@ -1,0 +1,3 @@
+Syntax Error: The jump target "18" is not defined for function invoke
+Syntax Error: The jump target "17" is not defined for function icmpgt
+Syntax Error: The jump target "16" is not defined for function goto

@@ -1,4 +1,4 @@
-0: goto 105
+0: goto 15
 1: fconst 3.14159
 2: freturn
 3: fload 0
