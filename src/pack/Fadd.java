@@ -9,7 +9,7 @@ public class Fadd extends Instruction
 	
 	public String print()
 	{	
-		return "Fadd";
+		return "fadd";
 	}
 	
 }

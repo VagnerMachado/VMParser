@@ -127,30 +127,13 @@ public abstract class LexVM
 	public static String tokens; //holds current concatenated tokens
 	public static State state;   //holds current state of DFA
 
-	public static void extract()
+	/**
+	 * lexycalAnalysis - Assumes the input and output Stream are initialized
+	 * Checks the input file for lexycal problems and prints when one is fould.
+	 * Otherwise prints the token and category it belongs to.
+	 */
+	public static void lexycalAnalysis()
 	{		
-		// argv[0]: input file containing tokens defined above
-		// argv[1]: output file displaying a list of the tokens and categories
-		//initialize a Stream with files passed as arguments
-		/*if(argv.length < 2)
-		{
-			System.out.println("\n\n ******************************* INPUT / OUTPUT ERROR ***********************************\n\n" + 
-					" This program requires input as command line arguments in order to run properly:\n" +
-					" argv[0] - must be a valid file name with input to be parsed\r\n" + 
-					" argv[1] - a valid file name for the parsed output to be written to\r\n" + 
-					" argv[2] - OPTIONAL: a file with expected output to be compared to generated output.\r\n" + 
-					"                     For details, check the Javadocs for compareOutput() in LexVM.java\n\n" +
-					" ** If running project in Eclipse, plese import project as described here: \n" +
-					" \t https://www.codejava.net/ides/eclipse/import-existing-projects-into-eclipse-workspace \n" +
-					" \t For the Eclipse option, the input files and matching expected output files are zipped in.\n\n"+
-					" ** If running on command line, enter the following commands inside folder 'pack' **\n" +
-					" \t javac *.java <enter>\n\t cd .. <enter>\n\t java pack.LexVM <inputFile.txt> <outputFile.txt> " +
-					"<expectedOutput.txt> <enter> \n  \n\t\t******* SUBSTITUTE THE FILE NAMES ACCORDINGLY ********\n\n" +
-					"NOTE: For command line, the parameter files, MUST be at the same level as 'pack' not inside it\n\n" +
-					" *****************************************************************************************");
-			return;
-		}
-		Stream st = new Stream(argv[0], argv[1]);*/
 		int i;
 
 		while ( Stream.intToken != -1 ) // while is not end-of-stream
@@ -163,11 +146,7 @@ public abstract class LexVM
 				Stream.displayln( tokens.trim() + "\t  : Lexical Error, invalid token");
 		} 
 		//close files in stream
-
-
-		//optional method that will run if an expected output file is passed as parameter
-		//if(argv.length == 3)
-		//	compareOutputs(argv[1], argv[2]);
+		Stream.close();
 	}
 
 	/**
@@ -196,7 +175,7 @@ public abstract class LexVM
 		{
 			Stream.charToken = (char) Stream.intToken;// parse int to char
 			nextSt = State.nextState(state, Stream.charToken ); //get next state based on char
-		//	System.out.println("next state: " + nextSt.toString());
+			//	System.out.println("next state: " + nextSt.toString());
 			if ( nextSt == State.UNDEF ) 			  // The current DFA operation will halt.
 			{
 				if (State.isFinal(state)) 			  // valid token extracted
@@ -229,12 +208,12 @@ public abstract class LexVM
 	/**
 	 * getToken - Extracts the next token using the driver of the FA.
 	 * If an invalid token is found, issue an error message.
-	 * Seems it is not being used for this program as token extraction occurs in Stream class
+	 * Used at the VM.java class to parse tokens
 	 */
 	public static String getToken()
 	{
 		int i = driver();
-	//	System.out.println("This is i: " + i + " and state is " + state.toString());
+		//	System.out.println("This is i: " + i + " and state is " + state.toString());
 		if (i == 0) //error
 		{
 			Stream.displayln(tokens + "\t: Lexical Error, invalid token");
@@ -245,66 +224,5 @@ public abstract class LexVM
 		else
 			return null; // -1 for end of file
 	}
-
-	/**
-	 * compareOutput - compares the expected and given outputs for program.
-	 * It was used to compare the seven sample outputs with the outputs 
-	 * given by program. It compares tokens delimited by spaces and halts
-	 * on the fidiscrepancy and prints on console.
-	 * 
-	 * NOTE: in order for output based on input8.txt to match expected8.txt,
-	 * the block on line 160 int State.java MUST be commented off. Refer to class
-	 * comment on top of LexVM.java file  for more information.
-	 * @param generated - the file name with generated lexical analysis
-	 * @param expected - the file name with expected lexical analysis
-	 */
-	public static void compareOutputs(String generated, String expected)
-	{
-		File g = new File(generated);
-		File e = new File(expected);
-
-		Scanner sg = null;
-		Scanner se = null;
-		try
-		{
-			se = new Scanner(e);
-			sg = new Scanner(g);
-		} catch (FileNotFoundException e1) 
-		{
-			System.out.println("\n\n *** ERROR: The program was not able to open the file with expected output ***\n\n");
-			e1.printStackTrace();
-		}
-
-		String gen = ""; String exp = "";
-		while (se.hasNext() && sg.hasNext())
-		{
-			gen = sg.next();
-			exp = se.next();
-
-			if(!exp.equals(gen)) 
-			{
-				System.out.println("\n*** ERROR: \'" + gen + "\' in " + generated + " does not match \'" 
-						+ exp + "\' in " + expected + " ***\n\n");
-				return;
-			}
-
-		}
-		if (sg.hasNext() && !se.hasNext())
-		{
-			gen = sg.nextLine();
-			while(sg.hasNextLine())
-				gen += "\n" + sg.nextLine();
-			System.out.println("\n*** ERROR: " + "generated output has extra token(s) in the end ***\n\n" + gen );
-
-		}
-		else if (!sg.hasNext() && se.hasNext())
-		{
-			exp = se.next();
-			while(se.hasNext())
-				exp += "\n" + se.next();
-			System.out.println(" *** ERROR: " + "expected output has extra token(s) in the end ***\n\n" + exp );
-		}
-		else
-			System.out.println("\n *** Expected output in " + expected + " matches the program output in " + generated + " ***\n\n");
-	}	
+	
 } 

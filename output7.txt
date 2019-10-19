@@ -1,0 +1,2 @@
+Syntax Error: The label 4 appears more than once
+Syntax Error: The label 1 appears more than once

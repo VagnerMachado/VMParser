@@ -17,22 +17,21 @@
   fdiv
 
   intToFloat
+  icmpeq 32
+  icmpne 32
+  icmplt 32
+  icmple 32
+  icmpgt 32
+  icmpge 32
+  fcmpeq 32
+  fcmpne 32
+  fcmplt 32
+  fcmple 32
+  fcmpgt 32
+  fcmpge 32
 
-  icmpeq 20
-  icmpne 20
-  icmplt 20
-  icmple 20
-  icmpgt 20
-  icmpge 20
-  fcmpeq 20
-  fcmpne 20
-  fcmplt 20
-  fcmple 20
-  fcmpgt 20
-  fcmpge 20
-
-  goto 20
-  invoke 40, 3, 4
+  goto 32
+  invoke 6, 3, 4
   return
   ireturn
   freturn

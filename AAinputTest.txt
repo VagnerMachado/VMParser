@@ -12,34 +12,36 @@ iconst 40
 
 iload 40
 
-iload +54
+iload 54
 
 iload 63
 
-istore +50
+istore 50
 
 istore 41
 
 fload 54
 
-fload +62
+fstore 98
+
+fload 62
 
 fstore 60
 
 fstore 60
 
-fconst 63
+fconst 63.3
 
-fconst 32
+fconst -32.6
 
-iconst 3.214587E2
+iconst -562
 
 iadd
 
 imul
 iconst 32
 27:
-imul idiv fadd fsub fmul fdiv fconst 32 iconst 32.9983587412 intToFloat
+imul idiv fadd fsub fmul fdiv fconst 32.98 iconst 3987 intToFloat
 
 ireturn
 
@@ -47,26 +49,26 @@ freturn 32:
 
 return
 
-goto +20
+goto 20
 
 goto 20
 
 print 7 
 
-print +7
+print 7
 69:
 print 9
 
 invoke 9 , 8 , 4  
-print +26
+print 26
 icmpeq 20
-icmpeq +21
+icmpeq 21
 icmpne 22
 icmpgt 23
 icmpge 24
 icmplt 23
 icmple 24
-fcmpeq +21
+fcmpeq 21
 fcmpne 22
 fcmpgt 23
 fcmpge 24

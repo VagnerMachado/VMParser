@@ -1,9 +1,12 @@
 package pack;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 
 /************************************************************************************
@@ -116,6 +119,64 @@ public abstract class Stream
 			System.out.println("Error calling close() in Stream class");
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * compareOutput - compares the expected and given outputs for program.
+	 * It was used to compare the seven sample outputs with the outputs 
+	 * given by program. It compares tokens delimited by spaces and halts
+	 * on the fidiscrepancy and prints on console.
+	 * @param generated - the file name with generated lexical analysis
+	 * @param expected - the file name with expected lexical analysis
+	 */
+	public static void compareOutputs(String generated, String expected)
+	{
+		File g = new File(generated);
+		File e = new File(expected);
+
+		Scanner sg = null;
+		Scanner se = null;
+		try
+		{
+			se = new Scanner(e);
+			sg = new Scanner(g);
+		} catch (FileNotFoundException e1) 
+		{
+			System.out.println("\n\n *** ERROR: The program was not able to open the file with expected output ***\n\n");
+			e1.printStackTrace();
+		}
+
+		String gen = ""; String exp = "";
+		while (se.hasNext() && sg.hasNext())
+		{
+			gen = sg.next();
+			exp = se.next();
+
+			if(!exp.equals(gen)) 
+			{
+				System.out.println("\n*** ERROR: \'" + gen + "\' in " + generated + " does not match \'" 
+						+ exp + "\' in " + expected + " ***\n\n");
+				return;
+			}
+
+		}
+		if (sg.hasNext() && !se.hasNext())
+		{
+			gen = sg.nextLine();
+			while(sg.hasNextLine())
+				gen += "\n" + sg.nextLine();
+			System.out.println("\n*** ERROR: " + "generated output has extra token(s) in the end ***\n\n" + gen );
+
+		}
+		else if (!sg.hasNext() && se.hasNext())
+		{
+			exp = se.next();
+			while(se.hasNext())
+				exp += "\n" + se.next();
+			System.out.println(" *** ERROR: " + "expected output has extra token(s) in the end ***\n\n" + exp );
+		}
+		else
+			System.out.println("\n *** Expected output in " + expected + " matches the program output in " + generated + " ***\n\n");
 	}
 
 

@@ -1,33 +1,51 @@
-0: iconst -123
-1: iload 5
-2: istore 6
-3: fconst 26.587
-4: fload 1
-5: fstore 2
-6: iadd
-7: isub
-8: imul
-9: idiv
-10: iadd
-11: fsub
-12: fmul
-13: fdiv
-14: intToFloat
-15: icmpeq 20
-16: icmpne 20
-17: icmplt 20
-18: icmple 20
-19: icmpgt 20
-20: icmpge 20
-21: fcmpeq 20
-22: fcmpne 20
-23: fcmplt 20
-24: fcmple 20
-25: fcmpgt 20
-26: icmpge 20
-27: goto 20
-28: invoke 40, 3, 4
-29: return
-30: ireturn
-31: freturn
-32: print 5
+0: iconst 50
+1: iconst -20
+2: iconst 40
+3: iload 40
+4: iload 54
+5: iload 63
+6: istore 50
+7: istore 41
+8: fload 54
+9: fstore 98
+10: fload 62
+11: fstore 60
+12: fstore 60
+13: fconst 63.3
+14: fconst -32.6
+15: iconst -562
+16: iadd
+17: imul
+18: iconst 32
+19: imul
+20: idiv
+21: iadd
+22: fsub
+23: fmul
+24: fdiv
+25: fconst 32.98
+26: iconst 3987
+27: intToFloat
+28: ireturn
+29: freturn
+30: return
+31: goto 20
+32: goto 20
+33: print 7
+34: print 7
+35: print 9
+36: invoke 9, 8, 4
+37: print 26
+38: icmpeq 20
+39: icmpeq 21
+40: icmpne 22
+41: icmpgt 23
+42: icmpge 24
+43: icmplt 23
+44: icmple 24
+45: fcmpeq 21
+46: fcmpne 22
+47: fcmpgt 23
+48: icmpge 24
+49: fcmplt 23
+50: fcmple 24
