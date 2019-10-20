@@ -11,6 +11,6 @@ public class Icmpge extends Compare
 	
 	public String print()
 	{
-		return "icmpge " + jump;
+		return "icmpge " + VM.jumpMap.get(jump);
 	}
 }

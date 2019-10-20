@@ -13,6 +13,6 @@ public class Invoke extends Instruction
 	
 	public String print()
 	{
-		return "invoke " + a + ", " + b + ", " + c;
+		return "invoke " + VM.jumpMap.get(a) + ", " + b + ", " + c;
 	}
 }

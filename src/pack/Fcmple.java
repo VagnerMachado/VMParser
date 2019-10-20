@@ -11,6 +11,6 @@ public class Fcmple extends Compare
 	
 	public String print() 
 	{	
-		return "fcmple " + jump ;
+		return "fcmple "+ VM.jumpMap.get(jump);
 	}
 }

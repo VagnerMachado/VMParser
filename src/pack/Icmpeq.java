@@ -11,6 +11,6 @@ public class Icmpeq extends Compare
 	
 	public String print()
 	{
-		return "icmpeq " + jump;
+		return "icmpeq " + VM.jumpMap.get(jump);
 	}
 }

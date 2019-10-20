@@ -1,4 +1,4 @@
-Syntax Error: The label 4 appears more than once
-Syntax Error: The label 1 appears more than once
+Syntax Error: The label "4" appears more than once
+Syntax Error: The label "1" appears more than once
 Syntax Error: The jump target "8" is not defined for function invoke
 Syntax Error: The jump target "10" is not defined for function icmpgt

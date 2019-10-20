@@ -106,17 +106,7 @@ import java.util.Scanner;
  *      Parse safely :)          
  *      -Vagner
  *  
- *  ***************************** INPUT / OUTPUT ***********************************
- *  
- *  This program requires input as command line arguments in order to run properly:
- *  
- *  argv[0] - must be a valid file name with input to be parsed
- *  argv[1] - a valid file name for the parsed output to be written to
- *  argv[2] - OPTIONAL: a file with expected output to be compared to generated output
- *            for details, check the Javadocs for comapareOutput() in LexVM.java
- *
- *
- * **********************************************************************************
+ ***********************************************************************************
  *
  *   @author ProfessorYukawa  -  Edited by VagnerMachado - QCID 23651127 - Fall 2019
  * 

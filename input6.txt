@@ -10,7 +10,7 @@
 3:
 	invoke 1, 0, 0
 	fload 1
-	invoke 3, 1, 0
+	invoke 2, 1, 0
 	fmul
 	fload 0
 	fmul
@@ -32,10 +32,10 @@
 	istore 2
 	iload 2
 	iconst 0
-	icmpgt 8
+	icmpgt 9
 	iload 2
 	iconst 10
-	icmpgt 5
+	icmpgt 10
 9:      iconst +6453
 	ireturn
 10:     iconst -1540
@@ -48,7 +48,7 @@
 	ireturn
 11:	iload 0
 	iconst 0
-	icmplt 13
+	icmplt 12
 	iload 0
 	iconst 10
 	icmpge 12
@@ -89,7 +89,7 @@
 
 	fconst 23.5
 	fconst 56.E+2
-	invoke 7, 2, 0
+	invoke 3, 2, 0
 	fstore 1
 	print 1
 

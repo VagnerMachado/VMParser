@@ -13,20 +13,20 @@
 12: fmul
 13: fdiv
 14: intToFloat
-15: icmpeq 20
-16: icmpne 20
-17: icmplt 20
-18: icmple 20
-19: icmpgt 20
-20: icmpge 20
-21: fcmpeq 20
-22: fcmpne 20
-23: fcmplt 20
-24: fcmple 20
-25: fcmpgt 20
-26: fcmpge 20
-27: goto 20
-28: invoke 40, 3, 4
+15: icmpeq 32
+16: icmpne 32
+17: icmplt 32
+18: icmple 32
+19: icmpgt 32
+20: icmpge 32
+21: fcmpeq 32
+22: fcmpne 32
+23: fcmplt 32
+24: fcmple 32
+25: fcmpgt 32
+26: fcmpge 32
+27: goto 32
+28: invoke 6, 3, 4
 29: return
 30: ireturn
 31: freturn
