@@ -1,9 +1,5 @@
 package pack;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 /************************************************************************************
  * LexVM - This class provides the driver for a lexical analyzer for tokens defined
  * in the following grammar:

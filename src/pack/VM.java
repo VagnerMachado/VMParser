@@ -670,11 +670,12 @@ public class VM extends LexVM
 				" argv[0] - must be a valid file name with input to be parsed\r\n" + 
 				" argv[1] - a valid file name for the parsed output to be written to\r\n" + 
 				" argv[2] - OPTIONAL: a file with expected output to be compared to generated output.\r\n" + 
-				"           For details, check the Javadocs for compareOutput() in Stream.java\n\n" +
+				"           For details, check the Javadocs for compareOutput() in Stream.java\n" + 
+				"           NOTE: argv[2] is used only if input does not have syntax errors\n\n" +
 				"****************************************************************************************************************\n"+
 				"  WARNING: Using argv[2] checks for EXACT match and HALTS program when first space delimiter mismatch is found\n"+
 				"****************************************************************************************************************\n\n"+
-				" ** If running project in Eclipse, plese import project as described here: \n" +
+				" ** If running project in Eclipse, please import project as described here: \n" +
 				" \t https://www.codejava.net/ides/eclipse/import-existing-projects-into-eclipse-workspace \n" +
 				" \t For the Eclipse option, the input files and matching expected output files are zipped in.\n" +
 				" ** If running on command line, enter the following commands inside folder 'pack' **\n" +
